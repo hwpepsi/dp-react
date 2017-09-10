@@ -1,39 +1,43 @@
 import React,{Component} from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
+import HomeHeader from '../../components/HomeHeader';
+import Category from '../../components/Category';
+import Ad from './subpage/Ad';
+
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux'
+//import {bindActionCreators} from 'redux'
 
-import * as userinfoActions from '../../actions/actlist'
-
+//import * as userinfoActions from '../../actions/actlist'
+import {get} from '../../axios/get'
 
 class Home extends Component{
   constructor(props, context){
     super(props, context);
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-    this.changeData = this.changeData.bind(this)
+    this.state={
+      data:''
+    }
   }
 
-  changeData() {
-    this.props.userActions.updateCityName({
-      userid:'hw',
-      city:'changsha'
-    })
-  }
+  
   render(){
     return (
       <div>
-        <p>{this.props.user.userid}</p>
-        <p>{this.props.user.city}</p>
-        <p onClick={this.changeData}>change</p>
+        <HomeHeader cityName={this.props.userinfo.cityName}/>
+        <Category />
+        <div style={{height: '15px'}}>{/* 分割线 */}</div>
+        <Ad />
       </div>
     );
   }
 
   componentDidMount() {
-    this.props.userActions.login({
-      userid:'abc',
-      city:'beijng'
+    get('/api/homead').then((res)=>{
+      //console.log(res.data[0]);
+      this.setState({
+        data:res.data[0]
+      })
     })
   }
 
@@ -43,13 +47,13 @@ class Home extends Component{
 
 function mapStateToProps(state){
   return{
-    user:state.userinfo
+    userinfo:state.userinfo
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    userActions:bindActionCreators(userinfoActions,dispatch)
+    
   }
 }
 

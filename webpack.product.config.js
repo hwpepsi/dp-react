@@ -30,6 +30,10 @@ module.exports = {
   module: {
     rules: [
       { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { 
+      test: /\.scss$/, 
+      use: ['style-loader','css-loader','sass-loader'] //use中的执行顺序是从右到左        
+      },
       { test: /\.less$/, exclude: /node_modules/, use: ExtractTextPlugin.extract({
         fallback: "style-loader",
         use: ["css-loader", "postcss-loader", "less-loader"]

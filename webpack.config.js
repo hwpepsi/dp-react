@@ -20,7 +20,14 @@ module.exports = {
       exclude: /node_modules/,
       include: /app/,
       loader: "babel-loader",
-    }, {
+    }, 
+    //样式加载
+    { 
+      test: /\.scss$/, 
+      use: ['style-loader','css-loader','sass-loader'] //use中的执行顺序是从右到左    
+     
+    },
+    {
       //css文件导入
       test: /\.css$/,
       include: /app/,
