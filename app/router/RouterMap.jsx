@@ -40,7 +40,7 @@ class App extends Component{
 		  </Switch>
 		);
 		return(
-			<Router>
+			<Router basename="/">
 			    <div>
 			    {
 			    	this.state.initDone
@@ -55,7 +55,7 @@ class App extends Component{
 	componentDidMount() {
 		//从localstorage里面获取城市
 		let cityName = localStore.getItem(CITYNAME);
-		console.log(cityName); //null
+		//console.log(cityName); //null
 		if(cityName == null){
 			cityName = '北京'
 		}
