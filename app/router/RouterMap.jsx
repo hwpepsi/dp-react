@@ -33,7 +33,7 @@ class App extends Component{
 		  <Switch>
 		    <Route path='/' exact component={Home}/>
 		    <Route path='/user'  component={User}/>
-		    <Route path='/search'  component={Search}/>
+		    <Route path='/search/:category/:keyword?'  component={Search}/>
 		    <Route path='/detail'  component={Detail}/>
 		    <Route path='/city'  component={City}/>
 		    <Route component={NotFound}/>

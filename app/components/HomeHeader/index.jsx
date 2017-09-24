@@ -4,11 +4,25 @@ import { Link } from 'react-router-dom'
 
 import './style.scss'
 
+import SearchInput from '../SearchInput'
+
+import PropTypes from 'prop-types';
+
 class HomeHeader extends Component{
   constructor(props, context){
     super(props, context);
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate;
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.enterHandle = this.enterHandle.bind(this);
+    this.state = {
+        kwd:''
+    }
+    
   }
+
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
+  
   render(){
     return (
         <div id="home-header" className="clear-fix">
@@ -28,13 +42,19 @@ class HomeHeader extends Component{
                 <div className="search-container">
                     <i className="icon-search"></i>
                     &nbsp;
-                    
+                    <SearchInput value="" enterHandle={this.enterHandle}/>
                 </div>
             </div>
         </div>
       
     );
   }
+
+  enterHandle(value) {
+        this.context.router.history.push('/search/all/' + encodeURIComponent(value));
+    }
+
+
 }
 
 export default HomeHeader

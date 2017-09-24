@@ -6,6 +6,8 @@ import Category from '../../components/Category';
 import Ad from './subpage/Ad';
 import List from './subpage/List';
 
+import { withRouter } from 'react-router-dom';
+
 import {connect} from 'react-redux';
 //import {bindActionCreators} from 'redux'
 
@@ -59,7 +61,8 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
 )(Home)
+);

@@ -20,6 +20,43 @@ router.get('/api/homelist/:city/:page',(ctx,next) => {
     ctx.body = homeListData
 })
 
+// 搜索结果页 - 搜索结果 - 三个参数
+const searchListData = require('./search/list')
+router.get('/api/search/:page/:city/:category/:keyword', (ctx,next) => {
+    //console.log('搜索结果页 - 搜索结果')
+
+    // 参数
+    const params = ctx.params
+    const paramsPage = params.page
+    const paramsCity = params.city
+    const paramsCategory = params.category
+    const paramsKeyword = params.keyword
+
+    console.log('当前页数：' + paramsPage)
+    console.log('当前城市：' + paramsCity)
+    console.log('当前类别：' + paramsCategory)
+    console.log('关键字：' + paramsKeyword)
+
+    ctx.body = searchListData
+})
+// 搜索结果页 - 搜索结果 - 两个参数
+router.get('/api/search/:page/:city/:category', (ctx,next) => {
+    console.log('搜索结果页 - 搜索结果')
+
+    // 参数
+    const params = ctx.params
+    const paramsPage = params.page
+    const paramsCity = params.city
+    const paramsCategory = params.category
+
+    console.log('当前页数：' + paramsPage)
+    console.log('当前城市：' + paramsCity)
+    console.log('当前类别：' + paramsCategory)
+
+    ctx.body = searchListData
+})
+
+
 //详情页面
 const detailData = require('./detail/info')
 router.get('/api/detail/info/:id',(ctx,next) => {

@@ -21,7 +21,7 @@ module.exports = {
   },
   output: {
   path: __dirname + "/build",
-    filename: "[name].[chunkhash:8].js",
+    filename: "[name].js",
     publicPath: '/'
   },
   resolve:{
@@ -31,19 +31,28 @@ module.exports = {
     rules: [
       { test: /\.(js|jsx)$/, exclude: /node_modules/, loader: 'babel-loader' },
       { 
-      test: /\.scss$/, 
-      use: ['style-loader','css-loader','sass-loader'] //use中的执行顺序是从右到左        
+        test: /\.(css|scss)$/, 
+        use:ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader','sass-loader']     
+      })
       },
-      { test: /\.less$/, exclude: /node_modules/, use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: ["css-loader", "postcss-loader", "less-loader"]
-      }) },
-      { test: /\.css$/, exclude: /node_modules/, use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: ["css-loader", "postcss-loader"]
-      }) },
-      { test:/\.(png|gif|jpg|jpeg|bmp)$/i, loader:'url-loader?limit=5000&name=img/[name].[chunkhash:8].[ext]' },
-      { test:/\.(png|woff|woff2|svg|ttf|eot)($|\?)/i, loader:'url-loader?limit=5000&name=fonts/[name].[chunkhash:8].[ext]'}
+
+      {
+        test:/\.(gif|png|jpe?g|svg)$/i,
+        use:['file-loader?limit=500&name=images/[name].[ext]',
+            //压缩图片文件
+            'image-webpack-loader'
+        ]//当图片大小小于这个限制的时候，会自动启用base64编码图片。减少http请求,提高性能
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+      }, 
+      {
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file-loader"
+      }
     ]
   },
   plugins: [
@@ -73,7 +82,11 @@ module.exports = {
     }),
 
     // 分离CSS和JS文件
-    new ExtractTextPlugin('[name].[chunkhash:8].css'),
+    new ExtractTextPlugin({
+      filename:'[name].bundle.css',
+      //disable:true,
+      allChunks:true
+    }),
 
     // 提供公共代码
     new webpack.optimize.CommonsChunkPlugin({
