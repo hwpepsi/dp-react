@@ -18,6 +18,7 @@ import User from '../containers/User';
 import Search from '../containers/Search';
 import Detail from '../containers/Detail';
 import City from '../containers/City';
+import Login from '../containers/Login';
 import NotFound from '../containers/404Page';
 
 class App extends Component{
@@ -33,8 +34,9 @@ class App extends Component{
 		  <Switch>
 		    <Route path='/' exact component={Home}/>
 		    <Route path='/user'  component={User}/>
+		    <Route path='/Login/:router?' component={Login}/>
 		    <Route path='/search/:category/:keyword?'  component={Search}/>
-		    <Route path='/detail'  component={Detail}/>
+		    <Route path='/detail/:id'  component={Detail}/>
 		    <Route path='/city'  component={City}/>
 		    <Route component={NotFound}/>
 		  </Switch>

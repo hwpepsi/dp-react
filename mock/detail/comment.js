@@ -1,5 +1,5 @@
 /**
- * Created by litong on 2017/6/8.
+ * Created by litong on 2017/10/4
  */
 module.exports = {
     hasMore: true,

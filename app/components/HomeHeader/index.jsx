@@ -34,9 +34,9 @@ class HomeHeader extends Component{
                 </Link>
             </div>
             <div className="home-header-right float-right">
-                
+                <Link to="/Login">
                     <i className="icon-user"></i>
-               
+                </Link>
             </div>
             <div className="home-header-middle">
                 <div className="search-container">

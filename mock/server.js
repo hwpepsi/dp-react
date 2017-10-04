@@ -67,14 +67,14 @@ router.get('/api/detail/info/:id',(ctx,next) => {
 })
 //详情页面 --评价列表
 const commentData = require('./detail/comment')
-router.get('/api/detail/comment/:id',(ctx,next) => {
+router.get('/api/detail/comment/:page/:id',(ctx,next) => {
     const params = ctx.params
     const id = params.id
     ctx.body = commentData
 })
 //User界面中 订单列表
 const orderList = require('./orderlist/orderlist')
-router.get('/api/user/orderlist',(ctx,next) => {
+router.get('/api/orderlist/:username',(ctx,next) => {
     ctx.body = orderList
 })
 

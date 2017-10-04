@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import { Link } from 'react-router-dom';
 
 import './style.scss';
 
@@ -12,7 +13,7 @@ export default class Item extends Component{
    const data = this.props.data
    return (
        <div className="list-item clear-fix">
-           
+            <Link to={'/detail/' + data.id}>
                <div className="item-img-container float-left">
                    <img src={data.img} alt={data.title}/>
                </div>
@@ -29,7 +30,7 @@ export default class Item extends Component{
                        <span className="mumber float-right">已售{data.mumber}</span>
                    </div>
                </div>
-           
+            </Link>
        </div>
    )
   }
