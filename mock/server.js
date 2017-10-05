@@ -72,10 +72,24 @@ router.get('/api/detail/comment/:page/:id',(ctx,next) => {
     const id = params.id
     ctx.body = commentData
 })
+
+
 //User界面中 订单列表
 const orderList = require('./orderlist/orderlist')
 router.get('/api/orderlist/:username',(ctx,next) => {
     ctx.body = orderList
+})
+
+// 提交评论
+router.post('/api/submitComment', (ctx,next) => {
+    console.log('提交评论')
+
+    // 获取参数
+
+    ctx.body = {
+        errno: 0,
+        msg: 'ok'
+    }
 })
 
 // 开始服务并生产路由

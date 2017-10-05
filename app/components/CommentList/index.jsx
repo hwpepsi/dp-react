@@ -11,16 +11,19 @@ class CommentList extends React.Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
     render() {
-        // 获取数据
         const data = this.props.data
 
         return (
-            <div className="comment-list">
+            <div>
                 {data.map((item, index) => {
                     return <Item key={index} data={item}/>
                 })}
             </div>
         )
+    }
+
+    componentDidMount(){
+        
     }
 }
 
